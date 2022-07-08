@@ -1,6 +1,5 @@
 using System;
-using 
-     System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -52,7 +51,6 @@ public static class Client
             Debug.Log("Download successful");
             _downloadData = www.downloadHandler.data;
         }
-        
     }
 
     public static byte[] RetrieveDownloadData()
