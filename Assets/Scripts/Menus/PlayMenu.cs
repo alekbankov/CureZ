@@ -17,16 +17,20 @@ public class PlayMenu : MonoBehaviour
 
 	public void LoadFriends()
     {
-
+		SceneManager.LoadScene("FriendsList");
     }
+	public void LoadGuild()
+	{
+		SceneManager.LoadScene("GuildMenu");
+	}
 
 	public void LoadRessources()
     {
-
+		SceneManager.LoadScene("ResourcesMenu");
     }
 
 	public void Quit()
     {
-		
+		Application.Quit();
     }
 }
