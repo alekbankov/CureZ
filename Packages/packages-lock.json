@@ -1,15 +1,5 @@
 {
   "dependencies": {
-    "com.unity.adaptiveperformance": {
-      "version": "3.0.0",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.subsystemregistration": "1.1.0",
-        "com.unity.profiling.core": "1.0.0"
-      },
-      "url": "https://packages.unity.com"
-    },
     "com.unity.collab-proxy": {
       "version": "1.15.18",
       "depth": 0,
@@ -61,44 +51,12 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
-    "com.unity.mobile.android-logcat": {
-      "version": "1.2.3",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.mobile.notifications": {
-      "version": "1.4.2",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.modules.androidjni": "1.0.0"
-      },
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.profiling.core": {
-      "version": "1.0.0",
-      "depth": 2,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://packages.unity.com"
-    },
     "com.unity.services.core": {
       "version": "1.0.1",
       "depth": 1,
       "source": "registry",
       "dependencies": {
         "com.unity.modules.unitywebrequest": "1.0.0"
-      },
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.subsystemregistration": {
-      "version": "1.1.0",
-      "depth": 2,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.modules.subsystems": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },
