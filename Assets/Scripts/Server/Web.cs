@@ -6,7 +6,6 @@ using UnityEngine.Networking;
 
 public class Web : MonoBehaviour
 {
-   
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +35,7 @@ public class Web : MonoBehaviour
         
     }
     // Update is called once per frame
+
     public IEnumerator RegisterUser(string username, string password, string confirmPass)
     {
         if (password.Equals(confirmPass))
