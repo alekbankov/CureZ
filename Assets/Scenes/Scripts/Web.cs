@@ -12,7 +12,29 @@ public class Web : MonoBehaviour
     {
         
     }
-  
+    public IEnumerator createGuild(string name)
+    {
+        
+            WWWForm form = new();
+        form.AddField("guildName", name);
+
+        string uri = "http://localhost/unityserver/CreateGuild.php";
+            using (UnityWebRequest www = UnityWebRequest.Post(uri, form))
+            {
+                yield return www.SendWebRequest();
+
+                if (www.isNetworkError || www.isHttpError)
+                {
+                    Debug.Log(www.error);
+                }
+                else
+                {
+                    Debug.Log(www.downloadHandler.text);
+                }
+            }
+        
+        
+    }
     // Update is called once per frame
     public IEnumerator RegisterUser(string username, string password, string confirmPass)
     {
