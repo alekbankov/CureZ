@@ -11,8 +11,9 @@ public class BattleHUD : MonoBehaviour
     public void SetHUD(CharacterStatus status)
     {
         nameText.text = status.name;
-        hpSlider.maxValue = status.maxHealth;
+        //hpSlider.maxValue = status.maxHealth;
         hpSlider.value = status.currentHealth;
+        Debug.Log(nameText.text);
     }
 
     public void SetHP(float current, float max)
@@ -20,4 +21,5 @@ public class BattleHUD : MonoBehaviour
         Debug.Log(nameText + " hp set");
         hpSlider.value = current/max;
     }
+    
 }

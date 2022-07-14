@@ -40,10 +40,12 @@ public class BattleManager : MonoBehaviour
         GameObject playerGO = Instantiate(playerPrefab, playerBattlePosition);
         playerGO.transform.SetParent(_canvas.transform);
         playerStatus = playerGO.GetComponent<CharacterStatus>();
+        playerHUD.SetHUD(playerStatus);
 
         GameObject enemyGO = Instantiate(enemyPrefab, enemyBattlePosition);
         enemyGO.transform.SetParent(_canvas.transform);
         enemyStatus = enemyGO.GetComponent<CharacterStatus>();
+        enemyHUD.SetHUD(enemyStatus);
 
         dialogueText.text = "Prepare for battle!";
         yield return new WaitForSeconds(1.5f);
@@ -94,7 +96,7 @@ public class BattleManager : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
         bool isDead = playerStatus.TakeDamage(enemyStatus.damage);
-        enemyHUD.SetHP(playerStatus.currentHealth, playerStatus.maxHealth);
+        playerHUD.SetHP(playerStatus.currentHealth, playerStatus.maxHealth);
         
         if (isDead)
         {

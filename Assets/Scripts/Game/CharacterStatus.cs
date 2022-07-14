@@ -15,6 +15,7 @@ public class CharacterStatus : MonoBehaviour
     {
         currentHealth -= damage;
 
+        Debug.Log(currentHealth + " is the current health");
         if (currentHealth <= 0)
             return true;
 

@@ -94,4 +94,4 @@ MonoBehaviour:
   gameObj: {fileID: 5225660402244960430}
   maxHealth: 100
   currentHealth: 100
-  damage: 12
+  damage: 3
