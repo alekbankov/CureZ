@@ -288,6 +288,16 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2871290784526291626, guid: 9bd52d97b436d497fa3ff2006fb0b7fe,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2871290784526291626, guid: 9bd52d97b436d497fa3ff2006fb0b7fe,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 76
+      objectReference: {fileID: 0}
     - target: {fileID: 3911202393406146158, guid: 9bd52d97b436d497fa3ff2006fb0b7fe,
         type: 3}
       propertyPath: m_Pivot.x
@@ -371,12 +381,12 @@ PrefabInstance:
     - target: {fileID: 3911202393406146158, guid: 9bd52d97b436d497fa3ff2006fb0b7fe,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 18
+      value: 145
       objectReference: {fileID: 0}
     - target: {fileID: 3911202393406146158, guid: 9bd52d97b436d497fa3ff2006fb0b7fe,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 159
+      value: 73
       objectReference: {fileID: 0}
     - target: {fileID: 3911202393406146158, guid: 9bd52d97b436d497fa3ff2006fb0b7fe,
         type: 3}
@@ -398,6 +408,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: CharacterHUD 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7635073072144450965, guid: 9bd52d97b436d497fa3ff2006fb0b7fe,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: c9f6d0e7bc8541498c9a4799ba184ede,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bd52d97b436d497fa3ff2006fb0b7fe, type: 3}
 --- !u!224 &340186918 stripped
@@ -442,7 +458,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 496622799}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 547, y: 236, z: 0}
+  m_LocalPosition: {x: 547, y: 303, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -804,8 +820,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 648, y: 352}
+  m_AnchoredPosition: {x: 1.2985, y: 2.597}
+  m_SizeDelta: {x: 863.547, y: 461.072}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1039338724
 MonoBehaviour:
@@ -827,8 +843,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 5b0afe43a1982124fb85c8003a2dea2b, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -881,8 +897,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 157.71576, y: -149}
-  m_SizeDelta: {x: 243.8361, y: 46.0615}
+  m_AnchoredPosition: {x: 157.71576, y: -141.02}
+  m_SizeDelta: {x: 243.8361, y: 62.031}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1317505753
 MonoBehaviour:
@@ -904,8 +920,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 4527bf35c3959cf4b8ab578a90dcd02b, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -955,8 +971,8 @@ MonoBehaviour:
     type: 3}
   enemyPrefab: {fileID: 5225660402244960430, guid: 9451fb8b67d5d49e3b0da88df446a5e4,
     type: 3}
-  playerBattlePosition: {fileID: 1485922831}
-  enemyBattlePosition: {fileID: 496622800}
+  playerBattlePosition: {fileID: 3240774909577439498}
+  enemyBattlePosition: {fileID: 340186918}
   state: 0
   dialogueText: {fileID: 1876309983}
   playerHUD: {fileID: 3240774909577439499}
@@ -1276,7 +1292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1284,7 +1300,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: c9f6d0e7bc8541498c9a4799ba184ede, type: 3}
     m_FontSize: 14
     m_FontStyle: 1
     m_BestFit: 0
@@ -1436,6 +1452,16 @@ PrefabInstance:
       propertyPath: m_TargetGraphic
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2871290784526291626, guid: 9bd52d97b436d497fa3ff2006fb0b7fe,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2871290784526291626, guid: 9bd52d97b436d497fa3ff2006fb0b7fe,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 84
+      objectReference: {fileID: 0}
     - target: {fileID: 3911202393406146158, guid: 9bd52d97b436d497fa3ff2006fb0b7fe,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1519,12 +1545,12 @@ PrefabInstance:
     - target: {fileID: 3911202393406146158, guid: 9bd52d97b436d497fa3ff2006fb0b7fe,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -249
+      value: -131
       objectReference: {fileID: 0}
     - target: {fileID: 3911202393406146158, guid: 9bd52d97b436d497fa3ff2006fb0b7fe,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 12
+      value: -95
       objectReference: {fileID: 0}
     - target: {fileID: 3911202393406146158, guid: 9bd52d97b436d497fa3ff2006fb0b7fe,
         type: 3}
@@ -1546,6 +1572,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: CharacterHUD
       objectReference: {fileID: 0}
+    - target: {fileID: 7635073072144450965, guid: 9bd52d97b436d497fa3ff2006fb0b7fe,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: c9f6d0e7bc8541498c9a4799ba184ede,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bd52d97b436d497fa3ff2006fb0b7fe, type: 3}
 --- !u!114 &1927235279446159205 stripped
