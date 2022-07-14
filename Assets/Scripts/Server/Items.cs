@@ -36,7 +36,7 @@ public class Items : MonoBehaviour
         {//create a few local variables
             bool isDone = false; //Are we done downloading the information
             string itemId = jsonArray[i].AsObject["itemID"];//getting the itemID from each array's row
-            JSONObject itemInfoJson = new();
+            JSONObject itemInfoJson = new JSONObject();
             //create a callback to get the information from the web.cs script
             Action<string> getItemInfoCallback = (itemInfo) =>
             {//this callback will be called from web.cs once the information of that specific item has been downloaded (isdone = true)
@@ -61,9 +61,9 @@ public class Items : MonoBehaviour
             Debug.Log(itemInfoJson["description"]);
 
             // fil lthe information that we downloaded inside our prefab
-            item.transform.Find("Name").GetComponentInChildren<Text>().text = itemInfoJson["name"];
-            item.transform.Find("Price").GetComponent<Text>().text = itemInfoJson["price"];
-            item.transform.Find("Description").GetComponent<Text>().text = itemInfoJson["description"];
+            // item.transform.Find("Name").GetComponentInChildren<Text>().text = itemInfoJson["name"];
+            // item.transform.Find("Price").GetComponent<Text>().text = itemInfoJson["price"];
+            // item.transform.Find("Description").GetComponent<Text>().text = itemInfoJson["description"];
 
             //continue to the next Item
         }

@@ -14,7 +14,7 @@ public class Web : MonoBehaviour
     public IEnumerator createGuild(string name)
     {
         
-            WWWForm form = new();
+            WWWForm form = new WWWForm();
         form.AddField("guildName", name);
 
         string uri = "http://localhost/unityserver/CreateGuild.php";
@@ -40,7 +40,7 @@ public class Web : MonoBehaviour
     {
         if (password.Equals(confirmPass))
         {
-            WWWForm form = new();
+            WWWForm form = new WWWForm();
             form.AddField("loginUser", username);
             form.AddField("loginPass", password);
             string uri = "http://localhost/unityserver/signup.php";
@@ -63,7 +63,7 @@ public class Web : MonoBehaviour
     public IEnumerator Login(string username, string password)//IEnumerator HAS to be called with coroutine
     {
 
-        WWWForm form = new();
+        WWWForm form = new WWWForm();
         form.AddField("loginUser", username);
         form.AddField("loginPass", password);
         //connect.text = "Loading...";
@@ -101,7 +101,7 @@ public class Web : MonoBehaviour
     public IEnumerator GetItemsIDs(string userID, System.Action<string> callback)
     {
         //sign the server needs some time to send a response, thats why we are using a callback
-        WWWForm form = new();
+        WWWForm form = new WWWForm();
         form.AddField("userID", userID);//the id of the person who holds some item for example youssef is ID 1 and he has the item "machete" which has an id of 2 so userID is 1 (Youssef)
         string uri = "http://localhost/unityserver/GetItemsIDs.php";
         using (UnityWebRequest request = UnityWebRequest.Post(uri, form))
@@ -124,7 +124,7 @@ public class Web : MonoBehaviour
     public IEnumerator GetItem(string itemID, System.Action<string> callback)
     {
         //sign the server needs some time to send a response, thats why we are using a callback
-        WWWForm form = new();
+        WWWForm form = new WWWForm();
         form.AddField("itemID", itemID);
         string uri = "http://localhost/unityserver/GetItem.php";
         using (UnityWebRequest request = UnityWebRequest.Post(uri, form))
