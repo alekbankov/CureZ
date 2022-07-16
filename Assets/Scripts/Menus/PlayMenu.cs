@@ -6,13 +6,19 @@ using UnityEngine.UI;
 
 public class PlayMenu : MonoBehaviour
 {
-	public Button playButton;
-	public Button friendsButton;
-	public Button ressourcesButton;
-	public Button quitButton;
+	[SerializeField]
+	private Button playButton;
+	[SerializeField]
+	private Button resourcesButton;
+	[SerializeField]
+	private Button friendsButton;
+	[SerializeField]
+	private Button GuildButton;
+	[SerializeField]
+	private Button quitButton;
 	public void LoadGame()
 	{
-		SceneManager.LoadScene("Game");
+		SceneManager.LoadScene("World");
 	}
 
 	public void LoadFriends()

@@ -4,5 +4,26 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Menus/MainMenu.unity
+    guid: 088aa0520ceedf341be0284ff7043922
+  - enabled: 1
+    path: Assets/Scenes/Menus/Login.unity
+    guid: 32259ec5db0361a4581109619892bad3
+  - enabled: 1
+    path: Assets/Scenes/Menus/PlayMenu.unity
+    guid: 0d234ab6508177b44969c01d27c422ea
+  - enabled: 1
+    path: Assets/Scenes/World/World.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/Menus/FriendsList.unity
+    guid: 132702e3d1b76e24d8433ae60265d22e
+  - enabled: 1
+    path: Assets/Scenes/Guild/GuildMenu.unity
+    guid: 5d126a72d2e7fc144bd6f14d826c9b16
+  - enabled: 1
+    path: Assets/Scenes/Guild/guildcreation.unity
+    guid: ef493852a3fa6f84c83ef6f8b26d817f
   m_configObjects: {}
