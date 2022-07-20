@@ -40,9 +40,8 @@ public class Player : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void addXp(int xp){
+        this.xp += Mathf.Max(0,xp);
     }
+
 }
