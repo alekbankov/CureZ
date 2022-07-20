@@ -144,6 +144,29 @@ public class Web : MonoBehaviour
             }
         }
     }
+    public IEnumerator SellItem(string ID, string itemID, string userID)
+    {
+        //sign the server needs some time to send a response, thats why we are using a callback
+        WWWForm form = new WWWForm();
+        form.AddField("itemID", itemID);
+        form.AddField("ID", ID);
+        form.AddField("userID", userID);
+        string uri = "http://localhost/unityserver/SellItem.php";
+        using (UnityWebRequest request = UnityWebRequest.Post(uri, form))
+        {
+
+            yield return request.SendWebRequest();
+            if (request.isHttpError || request.isNetworkError)
+            {
+                Debug.Log(request.error);//an error message is shown
+            }
+            else
+            {
+                Debug.Log(request.downloadHandler.text);//or success
+                
+            }
+        }
+    }
 
 
 }

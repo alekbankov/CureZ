@@ -5,10 +5,10 @@ using UnityEngine.UI;
 using System;
 using SimpleJSON;
 
-public class Items : MonoBehaviour
+public class ItemManager : MonoBehaviour
 {
-    [SerializeField] 
-    public GameObject item;
+    [SerializeField]
+    private GameObject itemPrefab;
     //public GameObject item;
     Action<string> _createItemsCallback;
     //public GameObject Item;
@@ -36,6 +36,7 @@ public class Items : MonoBehaviour
         {//create a few local variables
             bool isDone = false; //Are we done downloading the information
             string itemId = jsonArray[i].AsObject["itemID"];//getting the itemID from each array's row
+            string id = jsonArray[i].AsObject["ID"];
             JSONObject itemInfoJson = new JSONObject();
             //create a callback to get the information from the web.cs script
             Action<string> getItemInfoCallback = (itemInfo) =>
@@ -49,21 +50,32 @@ public class Items : MonoBehaviour
             //wait until the callback is called from WEB (info finished downloading)
             yield return new WaitUntil(() => isDone == true);
            
-           //item = Instantiate(Resources.Load("Prefabs/item") as GameObject);
+           var itemGo = Instantiate(itemPrefab);
             //GameObject item = Instantiate(Item) as GameObject;
-          
-            item.transform.SetParent(this.transform);//so that it because a child of the view we are in, this way it will be spaced and scaled the way the other items are
-            item.transform.localScale = Vector3.one;
-            item.transform.localPosition = Vector3.zero;
-            Debug.Log(itemInfoJson["name"]);
-          
-            Debug.Log(itemInfoJson["price"]);
-            Debug.Log(itemInfoJson["description"]);
+            Item item = itemGo.AddComponent<Item>();
+            item.ID = id;
+            item.ItemID = itemId;
+            itemGo.transform.SetParent(this.transform);//so that it because a child of the view we are in, this way it will be spaced and scaled the way the other items are
+            //itemGo.SetActive(true);
+            itemGo.transform.localScale = Vector3.one;
+            itemGo.transform.localPosition = Vector3.zero;
+
 
             // fil lthe information that we downloaded inside our prefab
-            // item.transform.Find("Name").GetComponentInChildren<Text>().text = itemInfoJson["name"];
-            // item.transform.Find("Price").GetComponent<Text>().text = itemInfoJson["price"];
-            // item.transform.Find("Description").GetComponent<Text>().text = itemInfoJson["description"];
+            
+                itemGo.transform.Find("Name").GetComponent<Text>().text = itemInfoJson["name"];
+             itemGo.transform.Find("Price").GetComponent<Text>().text = itemInfoJson["price"];
+             itemGo.transform.Find("Description").GetComponent<Text>().text = itemInfoJson["description"];
+
+            //set the sell button
+
+            itemGo.transform.Find("SellButton").GetComponent<Button>().onClick.AddListener(() => {
+                Debug.Log("Button clicked");
+                string iID = itemId;
+                string IdInInventory = id;
+                string userId = Main.Instance.UserInfo.UserID;
+                StartCoroutine(Main.Instance.Web.SellItem( IdInInventory,itemId, userId));
+                  });
 
             //continue to the next Item
         }
