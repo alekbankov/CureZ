@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028305, g: 0.22571313, b: 0.3069213, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -545,6 +545,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 567259692}
   m_CullTransparentMesh: 1
+--- !u!1 &713044867
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 713044868}
+  m_Layer: 0
+  m_Name: Screen Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &713044868
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 713044867}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 313, y: 163, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &775675887
 GameObject:
   m_ObjectHideFlags: 0
@@ -973,10 +1004,15 @@ MonoBehaviour:
     type: 3}
   playerBattlePosition: {fileID: 3240774909577439498}
   enemyBattlePosition: {fileID: 340186918}
-  state: 0
-  dialogueText: {fileID: 1876309983}
+  screenPosition: {fileID: 713044868}
   playerHUD: {fileID: 3240774909577439499}
   enemyHUD: {fileID: 359366089}
+  state: 0
+  dialogueText: {fileID: 1876309983}
+  Victory_Screen: {fileID: 5102569826639971125, guid: 144408372e9ad4b74b98d9bdc61c3c06,
+    type: 3}
+  Loss_Screen: {fileID: 7295132763230147106, guid: 1ec1426395a7b4f7e871a47a1a804f60,
+    type: 3}
 --- !u!4 &1480017707
 Transform:
   m_ObjectHideFlags: 0

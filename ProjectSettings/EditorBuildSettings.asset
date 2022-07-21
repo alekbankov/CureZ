@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Guild/guildcreation.unity
     guid: ef493852a3fa6f84c83ef6f8b26d817f
+  - enabled: 1
+    path: Assets/Scenes/Battle/BattleLobby.unity
+    guid: 144bf80c6f6fc4074a87d0289b0c75e5
   m_configObjects: {}

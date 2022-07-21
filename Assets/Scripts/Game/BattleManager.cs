@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = System.Random;
 
 public enum BattleState { START, PLAYERTURN, ENEMYTURN, WIN, LOST }
 public class BattleManager : MonoBehaviour
@@ -13,18 +15,23 @@ public class BattleManager : MonoBehaviour
 
     public Transform playerBattlePosition;
     public Transform enemyBattlePosition;
-
-    private GameObject _canvas;
-
-    public BattleState state;
-    
-    public Text dialogueText;
+    public Transform screenPosition;
 
     public BattleHUD playerHUD;
     public BattleHUD enemyHUD;
 
     private CharacterStatus playerStatus;
     private CharacterStatus enemyStatus;
+    
+    
+    private GameObject _canvas;
+
+    public BattleState state;
+    
+    public Text dialogueText;
+
+    public GameObject Victory_Screen, Loss_Screen;
+
     
     
 
@@ -52,7 +59,6 @@ public class BattleManager : MonoBehaviour
 
         dialogueText.text = "Your turn";
         state = BattleState.PLAYERTURN;
-        
     }
 
     IEnumerator PlayerAttack()
@@ -121,17 +127,25 @@ public class BattleManager : MonoBehaviour
         if (state == BattleState.WIN)
         {
             dialogueText.text = "You are victorious!";
+            GameObject screen = Instantiate(Victory_Screen, screenPosition);
+            screen.transform.SetParent(_canvas.transform);
+            Text txt = screen.GetComponentInChildren<Text>();
+            txt.text = CalculateBonus();
         }
         else if (state == BattleState.LOST)
         {
             dialogueText.text = "Battle lost";
+            GameObject screen = Instantiate(Loss_Screen, screenPosition);
+            screen.transform.SetParent(_canvas.transform);
         }
     }
 
-    void PlayerTurn()
+    string CalculateBonus()
     {
-        dialogueText.text = "Choose an action:";
-        
+        int stone = UnityEngine.Random.Range(enemyStatus.level - 8, enemyStatus.level + 10);
+        int wood = UnityEngine.Random.Range(enemyStatus.level - 8, enemyStatus.level + 10);
+        int coin = UnityEngine.Random.Range(enemyStatus.level - 8, enemyStatus.level + 10);
+        return "stone: " + stone + "\n wood: " + wood + "\n coin: " + coin;
     }
 
     public void OnAttackButton()
