@@ -148,8 +148,8 @@ public class Web : MonoBehaviour
     {
         //sign the server needs some time to send a response, thats why we are using a callback
         WWWForm form = new WWWForm();
-        form.AddField("itemID", itemID);
         form.AddField("ID", ID);
+        form.AddField("itemID", itemID);
         form.AddField("userID", userID);
         string uri = "http://localhost/unityserver/SellItem.php";
         using (UnityWebRequest request = UnityWebRequest.Post(uri, form))
