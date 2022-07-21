@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Battle/BattleLobby.unity
     guid: 144bf80c6f6fc4074a87d0289b0c75e5
+  - enabled: 1
+    path: Assets/Scenes/Battle/BattleArena.unity
+    guid: 518b55c63caa340f1b21de379b30d205
   m_configObjects: {}

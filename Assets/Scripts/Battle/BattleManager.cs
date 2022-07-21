@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = System.Random;
 
-public enum BattleState { START, PLAYERTURN, ENEMYTURN, WIN, LOST }
+public enum BattleState { START, PLAYERTURN, ENEMYTURN, WIN, LOST, BONUS }
 public class BattleManager : MonoBehaviour
 {
     public GameObject playerPrefab;
@@ -22,6 +22,8 @@ public class BattleManager : MonoBehaviour
 
     private CharacterStatus playerStatus;
     private CharacterStatus enemyStatus;
+    private bool revive, damageBonus;
+    private float bonusHeal;
     
     
     private GameObject _canvas;
@@ -38,6 +40,8 @@ public class BattleManager : MonoBehaviour
     private void Start()
     {
         state = BattleState.START;
+        revive = true;
+        damageBonus = false;
         _canvas = GameObject.Find("Canvas");
         StartCoroutine(SetupBattle());
     }
@@ -63,10 +67,23 @@ public class BattleManager : MonoBehaviour
 
     IEnumerator PlayerAttack()
     {
-        bool isDead = enemyStatus.TakeDamage(playerStatus.damage);
+        int bonus = 0;
+        if (damageBonus)
+        {
+            bonus = (int)playerStatus.damage / 10;
+        }
+        bool isDead = enemyStatus.TakeDamage(playerStatus.damage + bonus);
         
         enemyHUD.SetHP(enemyStatus.currentHealth, enemyStatus.maxHealth);
-        dialogueText.text = "Attack is successful!";
+        if (damageBonus)
+        {
+            dialogueText.text = "What a blow!";
+            damageBonus = false;
+        }
+        else
+        {
+            dialogueText.text = "Attack is successful!";
+        }
         
         yield return new WaitForSeconds(1.5f);
 
@@ -111,15 +128,35 @@ public class BattleManager : MonoBehaviour
         }
         else
         {
-            dialogueText.text = "Your turn";
-            state = BattleState.PLAYERTURN;
+            state = BattleState.BONUS;
+            StartCoroutine(TeamBonus());
         }
     }
 
-    IEnumerator Pause(string message)
+    IEnumerator TeamBonus()
     {
-        dialogueText.text = message;
-        yield return new WaitForSeconds(1.5f);
+        int index = UnityEngine.Random.Range(0, 6);
+        if (index == 1)
+        {
+            dialogueText.text = "Team Bonus!";
+            yield return new WaitForSeconds(0.5f);
+            
+            playerStatus.Heal(playerStatus.maxHealth/10);
+            playerHUD.SetHP(playerStatus.currentHealth, playerStatus.maxHealth);
+            dialogueText.text = "Allied health healed!";
+        }
+        if (index == 0)
+        {
+            dialogueText.text = "Team Bonus!";
+            yield return new WaitForSeconds(0.5f);
+            
+            dialogueText.text = "Damage bonus!";
+            damageBonus = true;
+        }
+
+        yield return new WaitForSeconds(1f);
+        dialogueText.text = "Your turn";
+        state = BattleState.PLAYERTURN;
     }
 
     void EndBattle()

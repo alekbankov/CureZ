@@ -100,7 +100,7 @@ MonoBehaviour:
   availableZombie:
   - {fileID: -6640728543001735671, guid: 8f9f29f2d4e959843be91737f65b164a, type: 3}
   - {fileID: -6640728543001735671, guid: 8f9f29f2d4e959843be91737f65b164a, type: 3}
-  player: {fileID: 313313321756730018}
+  player: {fileID: 0}
   waitTime: 180
   startingZombies: 5
   minRange: 5
@@ -648,7 +648,8 @@ GameObject:
   - component: {fileID: 364155378615176555}
   - component: {fileID: 313313321756730045}
   - component: {fileID: 313313321756730044}
-  - component: {fileID: 313313321756730018}
+  - component: {fileID: 317671393747807056}
+  - component: {fileID: 5964579415409133169}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -724,7 +725,7 @@ MonoBehaviour:
   _rotateZ: 0
   _useNegativeAngle: 0
   _useTransformLocationProvider: 0
---- !u!114 &313313321756730018
+--- !u!114 &317671393747807056
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -733,7 +734,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 314422478938624603}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8488da2bb15a70040b8bdd41f22bbc65, type: 3}
+  m_Script: {fileID: 11500000, guid: ab961e6227be2c642a3ce982eb573d5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   xp: 0
@@ -741,6 +742,19 @@ MonoBehaviour:
   levelBase: 100
   health: 100
   cars: []
+--- !u!65 &5964579415409133169
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314422478938624603}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 1, z: 0.5}
+  m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!1 &314451040478235497
 GameObject:
   m_ObjectHideFlags: 0

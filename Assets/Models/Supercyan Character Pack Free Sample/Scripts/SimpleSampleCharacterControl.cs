@@ -48,7 +48,7 @@ public class SimpleSampleCharacterControl : MonoBehaviour
         if (!m_animator) { gameObject.GetComponent<Animator>(); }
         if (!m_rigidBody) { gameObject.GetComponent<Animator>(); }
     }
-
+/*
     private void OnCollisionEnter(Collision collision)
     {
         ContactPoint[] contactPoints = collision.contacts;
@@ -56,9 +56,9 @@ public class SimpleSampleCharacterControl : MonoBehaviour
         {
             if (Vector3.Dot(contactPoints[i].normal, Vector3.up) > 0.5f)
             {
-                if (!m_collisions.Contains(collision.collider))
+                if (!m_collisions.Contains(collision.GetComponent<Collider>()))
                 {
-                    m_collisions.Add(collision.collider);
+                    m_collisions.Add(collision.GetComponent<Collider>());
                 }
                 m_isGrounded = true;
             }
@@ -80,16 +80,16 @@ public class SimpleSampleCharacterControl : MonoBehaviour
         if (validSurfaceNormal)
         {
             m_isGrounded = true;
-            if (!m_collisions.Contains(collision.collider))
+            if (!m_collisions.Contains(collision.GetComponent<Collider>()))
             {
-                m_collisions.Add(collision.collider);
+                m_collisions.Add(collision.GetComponent<Collider>());
             }
         }
         else
         {
-            if (m_collisions.Contains(collision.collider))
+            if (m_collisions.Contains(collision.GetComponent<Collider>()))
             {
-                m_collisions.Remove(collision.collider);
+                m_collisions.Remove(collision.GetComponent<Collider>());
             }
             if (m_collisions.Count == 0) { m_isGrounded = false; }
         }
@@ -97,13 +97,13 @@ public class SimpleSampleCharacterControl : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (m_collisions.Contains(collision.collider))
+        if (m_collisions.Contains(collision.GetComponent<Collider>()))
         {
-            m_collisions.Remove(collision.collider);
+            m_collisions.Remove(collision.GetComponent<Collider>());
         }
         if (m_collisions.Count == 0) { m_isGrounded = false; }
     }
-
+*/
     private void Update()
     {
         if (!m_jumpInput && Input.GetKey(KeyCode.Space))
