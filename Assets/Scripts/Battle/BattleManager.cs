@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = System.Random;
 
-public enum BattleState { START, PLAYERTURN, ENEMYTURN, WIN, LOST }
+public enum BattleState { START, PLAYERTURN, ENEMYTURN, WIN, LOST, BONUS }
 public class BattleManager : MonoBehaviour
 {
     public GameObject playerPrefab;
@@ -13,24 +15,33 @@ public class BattleManager : MonoBehaviour
 
     public Transform playerBattlePosition;
     public Transform enemyBattlePosition;
-
-    private GameObject _canvas;
-
-    public BattleState state;
-    
-    public Text dialogueText;
+    public Transform screenPosition;
 
     public BattleHUD playerHUD;
     public BattleHUD enemyHUD;
 
     private CharacterStatus playerStatus;
     private CharacterStatus enemyStatus;
+    private bool revive, damageBonus;
+    private float bonusHeal;
+    
+    
+    private GameObject _canvas;
+
+    public BattleState state;
+    
+    public Text dialogueText;
+
+    public GameObject Victory_Screen, Loss_Screen;
+
     
     
 
     private void Start()
     {
         state = BattleState.START;
+        revive = true;
+        damageBonus = false;
         _canvas = GameObject.Find("Canvas");
         StartCoroutine(SetupBattle());
     }
@@ -52,15 +63,27 @@ public class BattleManager : MonoBehaviour
 
         dialogueText.text = "Your turn";
         state = BattleState.PLAYERTURN;
-        
     }
 
     IEnumerator PlayerAttack()
     {
-        bool isDead = enemyStatus.TakeDamage(playerStatus.damage);
+        int bonus = 0;
+        if (damageBonus)
+        {
+            bonus = (int)playerStatus.damage / 10;
+        }
+        bool isDead = enemyStatus.TakeDamage(playerStatus.damage + bonus);
         
         enemyHUD.SetHP(enemyStatus.currentHealth, enemyStatus.maxHealth);
-        dialogueText.text = "Attack is successful!";
+        if (damageBonus)
+        {
+            dialogueText.text = "What a blow!";
+            damageBonus = false;
+        }
+        else
+        {
+            dialogueText.text = "Attack is successful!";
+        }
         
         yield return new WaitForSeconds(1.5f);
 
@@ -105,15 +128,35 @@ public class BattleManager : MonoBehaviour
         }
         else
         {
-            dialogueText.text = "Your turn";
-            state = BattleState.PLAYERTURN;
+            state = BattleState.BONUS;
+            StartCoroutine(TeamBonus());
         }
     }
 
-    IEnumerator Pause(string message)
+    IEnumerator TeamBonus()
     {
-        dialogueText.text = message;
-        yield return new WaitForSeconds(1.5f);
+        int index = UnityEngine.Random.Range(0, 6);
+        if (index == 1)
+        {
+            dialogueText.text = "Team Bonus!";
+            yield return new WaitForSeconds(0.5f);
+            
+            playerStatus.Heal(playerStatus.maxHealth/10);
+            playerHUD.SetHP(playerStatus.currentHealth, playerStatus.maxHealth);
+            dialogueText.text = "Allied health healed!";
+        }
+        if (index == 0)
+        {
+            dialogueText.text = "Team Bonus!";
+            yield return new WaitForSeconds(0.5f);
+            
+            dialogueText.text = "Damage bonus!";
+            damageBonus = true;
+        }
+
+        yield return new WaitForSeconds(1f);
+        dialogueText.text = "Your turn";
+        state = BattleState.PLAYERTURN;
     }
 
     void EndBattle()
@@ -121,17 +164,25 @@ public class BattleManager : MonoBehaviour
         if (state == BattleState.WIN)
         {
             dialogueText.text = "You are victorious!";
+            GameObject screen = Instantiate(Victory_Screen, screenPosition);
+            screen.transform.SetParent(_canvas.transform);
+            Text txt = screen.GetComponentInChildren<Text>();
+            txt.text = CalculateBonus();
         }
         else if (state == BattleState.LOST)
         {
             dialogueText.text = "Battle lost";
+            GameObject screen = Instantiate(Loss_Screen, screenPosition);
+            screen.transform.SetParent(_canvas.transform);
         }
     }
 
-    void PlayerTurn()
+    string CalculateBonus()
     {
-        dialogueText.text = "Choose an action:";
-        
+        int stone = UnityEngine.Random.Range(enemyStatus.level - 8, enemyStatus.level + 10);
+        int wood = UnityEngine.Random.Range(enemyStatus.level - 8, enemyStatus.level + 10);
+        int coin = UnityEngine.Random.Range(enemyStatus.level - 8, enemyStatus.level + 10);
+        return "stone: " + stone + "\n wood: " + wood + "\n coin: " + coin;
     }
 
     public void OnAttackButton()
