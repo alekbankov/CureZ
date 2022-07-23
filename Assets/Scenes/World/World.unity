@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45111823, g: 0.50091326, b: 0.57400125, a: 1}
+  m_IndirectSpecularColor: {r: 0.44846332, g: 0.4975835, b: 0.5713554, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1987,7 +1987,12 @@ PrefabInstance:
     - target: {fileID: 308992543801328557, guid: 84d545773fcff4643afbf3c8b811ae5b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 308992543801328557, guid: 84d545773fcff4643afbf3c8b811ae5b,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 308992543801328557, guid: 84d545773fcff4643afbf3c8b811ae5b,
         type: 3}
@@ -1997,7 +2002,7 @@ PrefabInstance:
     - target: {fileID: 308992543801328557, guid: 84d545773fcff4643afbf3c8b811ae5b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.58
       objectReference: {fileID: 0}
     - target: {fileID: 308992543801328557, guid: 84d545773fcff4643afbf3c8b811ae5b,
         type: 3}
@@ -2076,12 +2081,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84d545773fcff4643afbf3c8b811ae5b, type: 3}
---- !u!20 &1346354092 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 313313321106473760, guid: 84d545773fcff4643afbf3c8b811ae5b,
-    type: 3}
-  m_PrefabInstance: {fileID: 1346354091}
-  m_PrefabAsset: {fileID: 0}
 --- !u!21 &1397251428
 Material:
   serializedVersion: 8
@@ -2652,7 +2651,7 @@ MonoBehaviour:
   _zoomSpeed: 50
   _maxZoomIn: 10
   _maxZoomOut: 200
-  _referenceCamera: {fileID: 1346354092}
+  _referenceCamera: {fileID: 2018406206}
 --- !u!81 &2018406205
 AudioListener:
   m_ObjectHideFlags: 0
