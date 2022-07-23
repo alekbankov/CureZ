@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 using Random = System.Random;
 
@@ -35,9 +36,8 @@ public class BattleManager : MonoBehaviour
     public GameObject Victory_Screen, Loss_Screen;
 
     
-    
-
-    private void Start()
+#region SetUp    
+    void Start()
     {
         state = BattleState.START;
         revive = true;
@@ -64,7 +64,9 @@ public class BattleManager : MonoBehaviour
         dialogueText.text = "Your turn";
         state = BattleState.PLAYERTURN;
     }
+#endregion
 
+#region Battle
     IEnumerator PlayerAttack()
     {
         int bonus = 0;
@@ -159,6 +161,32 @@ public class BattleManager : MonoBehaviour
         state = BattleState.PLAYERTURN;
     }
 
+
+    string CalculateBonus()
+    {
+        int coin = UnityEngine.Random.Range(enemyStatus.level - 8, enemyStatus.level + 10);
+        StartCoroutine(CoinUpdate(coin, UserInfo.UserID));
+        return "coin: " + coin;
+    }
+
+    public void OnAttackButton()
+    {
+        if (state != BattleState.PLAYERTURN)
+            return;
+
+        StartCoroutine(PlayerAttack());
+    }
+
+    public void OnHealButton()
+    {
+        if (state != BattleState.PLAYERTURN)
+            return;
+
+        StartCoroutine(PlayerHeal());
+    }
+#endregion
+
+#region BattleEnd
     void EndBattle()
     {
         if (state == BattleState.WIN)
@@ -177,27 +205,28 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    string CalculateBonus()
+    IEnumerator CoinUpdate(int coin, string userID)
     {
-        int stone = UnityEngine.Random.Range(enemyStatus.level - 8, enemyStatus.level + 10);
-        int wood = UnityEngine.Random.Range(enemyStatus.level - 8, enemyStatus.level + 10);
-        int coin = UnityEngine.Random.Range(enemyStatus.level - 8, enemyStatus.level + 10);
-        return "stone: " + stone + "\n wood: " + wood + "\n coin: " + coin;
+        string uri = "http://localhost/unityserver/GetCoinsBattle.php";
+        WWWForm form = new WWWForm();
+        form.AddField("coins", coin);
+        form.AddField(userID, UserInfo.UserID);
+        
+        using (UnityWebRequest www = UnityWebRequest.Post(uri, form))
+        {
+            yield return www.SendWebRequest();
+            
+            if (www.result == UnityWebRequest.Result.ConnectionError ||
+                www.result == UnityWebRequest.Result.ProtocolError ||
+                www.result == UnityWebRequest.Result.DataProcessingError)
+            {
+                Debug.Log(www.error);
+            }
+            else
+            {
+                Debug.Log("Resource updated successfully");
+            }
+        }
     }
-
-    public void OnAttackButton()
-    {
-        if (state != BattleState.PLAYERTURN)
-            return;
-
-        StartCoroutine(PlayerAttack());
-    }
-
-    public void OnHealButton()
-    {
-        if (state != BattleState.PLAYERTURN)
-            return;
-
-        StartCoroutine(PlayerHeal());
-    }
+#endregion    
 }
