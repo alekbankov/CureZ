@@ -164,11 +164,9 @@ public class BattleManager : MonoBehaviour
 
     string CalculateBonus()
     {
-        int stone = UnityEngine.Random.Range(enemyStatus.level - 8, enemyStatus.level + 10);
-        int wood = UnityEngine.Random.Range(enemyStatus.level - 8, enemyStatus.level + 10);
         int coin = UnityEngine.Random.Range(enemyStatus.level - 8, enemyStatus.level + 10);
-        StartCoroutine(ResourceUpdate(wood, stone, coin));
-        return "stone: " + stone + "\n wood: " + wood + "\n coin: " + coin;
+        StartCoroutine(CoinUpdate(coin, UserInfo.UserID));
+        return "coin: " + coin;
     }
 
     public void OnAttackButton()
@@ -207,13 +205,12 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    IEnumerator ResourceUpdate(int wood, int stone, int coin)
+    IEnumerator CoinUpdate(int coin, string userID)
     {
-        string uri = "";
+        string uri = "http://localhost/unityserver/GetCoinsBattle.php";
         WWWForm form = new WWWForm();
-        form.AddField("Wood", wood);
-        form.AddField("stone", stone);
-        form.AddField("coin", coin);
+        form.AddField("coins", coin);
+        form.AddField(userID, UserInfo.UserID);
         
         using (UnityWebRequest www = UnityWebRequest.Post(uri, form))
         {
