@@ -326,7 +326,28 @@ public class Web : MonoBehaviour
             }
         }
     }
+    public IEnumerator GetCoinsBattle(string userID, string coins)//userID is the person who won the battle
+    {
+        
+        WWWForm form = new WWWForm();
+        form.AddField("userID", userID);
+        form.AddField("coins",coins);
+        string uri = "http://localhost/unityserver/GetCoinsBattle.php";
+        using (UnityWebRequest request = UnityWebRequest.Post(uri, form))
+        {
 
+            yield return request.SendWebRequest();
+            if (request.isHttpError || request.isNetworkError)
+            {
+                Debug.Log(request.error);//an error message is shown
+            }
+            else
+            {
+                Debug.Log(request.downloadHandler.text);//or success
+               
+            }
+        }
+    }
 
 
 }
