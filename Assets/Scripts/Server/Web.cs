@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
-
+using UnityEngine.SceneManagement;
 public class Web : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -79,8 +79,8 @@ public class Web : MonoBehaviour
             {
                 Debug.Log(request.downloadHandler.text);
                 //or success
-                Main.Instance.UserInfo.setCredentials(username, password);
-                Main.Instance.UserInfo.setID(request.downloadHandler.text);//set the current ID to the user who just logged in's ID
+                UserInfo.setCredentials(username, password);
+                UserInfo.setID(request.downloadHandler.text);//set the current ID to the user who just logged in's ID
                 //this if means we didn't login correctly, we put a small message to try again
                 if ((request.downloadHandler.text.Contains("Wrong Password") ||
                     request.downloadHandler.text.Contains("Username does not exist")))
@@ -88,9 +88,16 @@ public class Web : MonoBehaviour
                     Debug.Log("Try Agin");
                 }
                 else 
-                { 
-                    Main.Instance.UserProfile.SetActive(true);//show us the new view after we log in
-                    Main.Instance.login.gameObject.SetActive(false);//turn off the login view
+                {
+
+                    //Main.Instance.login.gameObject.SetActive(false);
+                  
+                    //Main.Instance.canvasMenu.SetActive(true);
+                    SceneManager.LoadScene("PlayMenu");
+
+                    //show us the new view after we log in
+                    //turn off the login view
+
                 }
 
 
@@ -107,6 +114,53 @@ public class Web : MonoBehaviour
         using (UnityWebRequest request = UnityWebRequest.Post(uri, form))
         {
         
+            yield return request.SendWebRequest();
+            if (request.isHttpError || request.isNetworkError)
+            {
+                Debug.Log(request.error);//an error message is shown
+            }
+            else
+            {
+                Debug.Log(request.downloadHandler.text);//or success
+                string jsonArray = request.downloadHandler.text;
+                //call callback function to pass results
+                callback(jsonArray);
+            }
+        }
+    }
+
+    public IEnumerator GetFriendsIDs(string userID, System.Action<string> callback)//sender is UserID of the person who sends the friend request
+    {
+        //sign the server needs some time to send a response, thats why we are using a callback
+        WWWForm form = new WWWForm();
+        form.AddField("userID", userID);
+        string uri = "http://localhost/unityserver/GetfriendsID.php";
+        using (UnityWebRequest request = UnityWebRequest.Post(uri, form))
+        {
+
+            yield return request.SendWebRequest();
+            if (request.isHttpError || request.isNetworkError)
+            {
+                Debug.Log(request.error);//an error message is shown
+            }
+            else
+            {
+                Debug.Log(request.downloadHandler.text);//or success
+                string jsonArray = request.downloadHandler.text;
+                //call callback function to pass results
+                callback(jsonArray);
+            }
+        }
+    }
+    public IEnumerator GetFriendsList(string friendID, System.Action<string> callback)//sender is UserID of the person who sends the friend request
+    {
+        //sign the server needs some time to send a response, thats why we are using a callback
+        WWWForm form = new WWWForm();
+        form.AddField("FriendID", friendID);
+        string uri = "http://localhost/unityserver/Getfriends.php";
+        using (UnityWebRequest request = UnityWebRequest.Post(uri, form))
+        {
+
             yield return request.SendWebRequest();
             if (request.isHttpError || request.isNetworkError)
             {
