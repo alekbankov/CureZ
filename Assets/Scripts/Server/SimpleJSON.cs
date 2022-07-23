@@ -1014,6 +1014,10 @@ namespace SimpleJSON
             aSB.Append('}');
         }
 
+        internal JSONArray getJSONArray(string v)
+        {
+            throw new NotImplementedException();
+        }
     }
     // End of JSONObject
 

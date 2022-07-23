@@ -18,6 +18,7 @@ public class ItemManager : MonoBehaviour
         _createItemsCallback = (jsonArrayString) =>
         {
             StartCoroutine(CreateItemsRoutine(jsonArrayString));
+            StartCoroutine(Main.Instance.Web.GetUserInfo(UserInfo.UserID));
         };
         CreateItems();
     }
@@ -74,7 +75,12 @@ public class ItemManager : MonoBehaviour
                 string iID = itemId;
                 string IdInInventory = id;
                 string userId = UserInfo.UserID;
-                StartCoroutine(Main.Instance.Web.SellItem( IdInInventory,itemId, userId));
+                string buyerID = UserInfo.buyerID;
+                
+                StartCoroutine(Main.Instance.Web.RequestingAnItem(userId, "2", iID));
+                StartCoroutine(Main.Instance.Web.SellItem( IdInInventory,buyerID, itemId, userId));
+
+                itemGo.SetActive(false);
                   });
 
             //continue to the next Item
