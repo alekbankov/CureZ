@@ -12,6 +12,8 @@ using UnityEngine.UI;
  * Problem2: know when all allies have taken damage
  * Idea: create a new IEnumerator that tells the server the player has taken damage and another
  *      IEnumerator that tells the player wether all players are done taking damage
+ *
+ * OBS: Discontinued due to lack of time.
  */
 public enum BattleStateM { START, HOST, CONNECTING, ERROR, PLAYERTURN, ENEMYTURN, WIN, LOST }
 public class OnlineBattleManager : MonoBehaviour

@@ -25,7 +25,7 @@ public class ItemManager : MonoBehaviour
     // Update is called once per frame
    public void CreateItems()
     {
-        string userId = Main.Instance.UserInfo.UserID;
+        string userId = UserInfo.UserID;
         StartCoroutine(Main.Instance.Web.GetItemsIDs(userId, _createItemsCallback));
     }
     IEnumerator CreateItemsRoutine(string jsonArrayString)
@@ -73,7 +73,7 @@ public class ItemManager : MonoBehaviour
                 Debug.Log("Button clicked");
                 string iID = itemId;
                 string IdInInventory = id;
-                string userId = Main.Instance.UserInfo.UserID;
+                string userId = UserInfo.UserID;
                 StartCoroutine(Main.Instance.Web.SellItem( IdInInventory,itemId, userId));
                   });
 

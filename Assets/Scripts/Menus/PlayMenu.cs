@@ -32,8 +32,11 @@ public class PlayMenu : MonoBehaviour
 
 	public void LoadRessources()
     {
-		SceneManager.LoadScene("ResourcesMenu");
-    }
+		SceneManager.LoadScene("UserItems");
+		
+		//Main.Instance.UserProfile.SetActive(true);
+		//Main.Instance.canvasMenu.SetActive(false);
+	}
 
 	public void Quit()
     {

@@ -2219,7 +2219,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Web: {fileID: 0}
-  UserInfo: {fileID: 0}
   login: {fileID: 710922765}
   UserProfile: {fileID: 649626091}
 --- !u!4 &1204217862
@@ -2261,6 +2260,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c38d37618ccd024aa12d3ca2dd13195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <UserID>k__BackingField: 
+  UserName: 
+  UserPassword: 
+  Level: 
+  coins: 
 --- !u!1 &1229909523
 GameObject:
   m_ObjectHideFlags: 0
