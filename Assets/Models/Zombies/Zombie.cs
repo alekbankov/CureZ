@@ -5,16 +5,19 @@ using UnityEngine;
 public class Zombie : MonoBehaviour
 {
 
+    //moving toward player configuration
     public Transform player;
-    Rigidbody rb;
+    private Rigidbody rb;
+    private float distance;
+    
+    //moving animation configuration
+    public GameObject TargetChar;
+    public AnimationClip Attack03Anim;
 
     [SerializeField] private float spawnRate = 0.5f;
     [SerializeField] private int attack = 0;
-
     [SerializeField] private int defense = 0;
-
     [SerializeField] private int hp = 10;
-
     [SerializeField] private int speed = 5;
 
     public float SpawnRate {
@@ -46,10 +49,17 @@ public class Zombie : MonoBehaviour
     //Update is called once per frame
     void FixedUpdate()
     {
-
+        distance = Vector3.Distance(transform.position, player.position);
         //Make the enemy move
-            Vector3 pos = Vector3.MoveTowards(transform.position, player.position, speed * Time.fixedDeltaTime);
+        Vector3 pos = Vector3.MoveTowards(transform.position, player.position, speed * Time.fixedDeltaTime);
+        if(distance < 10) {
             rb.MovePosition(pos);
+            bool isMoving;
+            isMoving = transform.position != player.position;
+            if(isMoving == true) {
+                TargetChar.GetComponent<Animation>().Play(Attack03Anim.name);
+            }
             transform.LookAt(player);
+        }
     }
 }

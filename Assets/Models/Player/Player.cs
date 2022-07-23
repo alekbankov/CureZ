@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 
 public class Player : MonoBehaviour
 {
-
+    
     [SerializeField] private int xp = 0;
     [SerializeField] private int requiredXp = 100;
     [SerializeField] private int levelBase = 100;
     [SerializeField] private int health = 100;
     [SerializeField] private List<GameObject> cars = new List<GameObject>();
+    [SerializeField] private int speed = 1;
 
     private int level = 1;
 
@@ -23,7 +25,7 @@ public class Player : MonoBehaviour
     }
 
     public int Health{
-        get {return health;}
+            get {return health;}
     }
 
     public int LevelBase{
@@ -37,11 +39,12 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     public void addXp(int xp){
         this.xp += Mathf.Max(0,xp);
     }
 
+
+    
 }
