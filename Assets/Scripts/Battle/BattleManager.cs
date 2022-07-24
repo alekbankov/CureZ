@@ -1,12 +1,8 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
-using Random = System.Random;
 
 public enum BattleState { START, PLAYERTURN, ENEMYTURN, WIN, LOST, BONUS }
 public class BattleManager : MonoBehaviour
@@ -24,7 +20,7 @@ public class BattleManager : MonoBehaviour
     private CharacterStatus playerStatus;
     private CharacterStatus enemyStatus;
     private bool revive, damageBonus;
-    private float bonusHeal;
+    private float bonusHeal, nightDamage;
     
     
     private GameObject _canvas;
@@ -56,6 +52,11 @@ public class BattleManager : MonoBehaviour
         GameObject enemyGO = Instantiate(enemyPrefab, enemyBattlePosition);
         enemyGO.transform.SetParent(_canvas.transform);
         enemyStatus = enemyGO.GetComponent<CharacterStatus>();
+        if (BattleData.ZombieLevel != 0)
+        {
+            enemyStatus.level = BattleData.ZombieLevel;
+        }
+        if (BattleData.NightTime) nightDamage = enemyStatus.damage / 20;
         enemyHUD.SetHUD(enemyStatus);
 
         dialogueText.text = "Prepare for battle!";
@@ -74,7 +75,7 @@ public class BattleManager : MonoBehaviour
         {
             bonus = (int)playerStatus.damage / 10;
         }
-        bool isDead = enemyStatus.TakeDamage(playerStatus.damage + bonus);
+        bool isDead = enemyStatus.TakeDamage(playerStatus.damage + bonus + BattleData.ItemDamage);
         
         enemyHUD.SetHP(enemyStatus.currentHealth, enemyStatus.maxHealth);
         if (damageBonus)
@@ -84,7 +85,7 @@ public class BattleManager : MonoBehaviour
         }
         else
         {
-            dialogueText.text = "Attack is successful!";
+            dialogueText.text = "Machete slash!";
         }
         
         yield return new WaitForSeconds(1.5f);
@@ -106,7 +107,7 @@ public class BattleManager : MonoBehaviour
         playerStatus.Heal(10);
         
         playerHUD.SetHP(playerStatus.currentHealth, playerStatus.maxHealth);
-        dialogueText.text = "HP healed!";
+        dialogueText.text = "HP healed with bandages!";
 
         yield return new WaitForSeconds(1.5f);
 
@@ -118,9 +119,15 @@ public class BattleManager : MonoBehaviour
     {
         dialogueText.text = "Enemy attacks";
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.5f);
 
-        bool isDead = playerStatus.TakeDamage(enemyStatus.damage);
+        if (BattleData.NightTime)
+        {
+            dialogueText.text = "Fear the dark!";
+            yield return new WaitForSeconds(1f);
+        }
+
+        bool isDead = playerStatus.TakeDamage(enemyStatus.damage + nightDamage);
         playerHUD.SetHP(playerStatus.currentHealth, playerStatus.maxHealth);
         
         if (isDead)
@@ -145,7 +152,7 @@ public class BattleManager : MonoBehaviour
             
             playerStatus.Heal(playerStatus.maxHealth/10);
             playerHUD.SetHP(playerStatus.currentHealth, playerStatus.maxHealth);
-            dialogueText.text = "Allied health healed!";
+            dialogueText.text = "Allies healed!";
         }
         if (index == 0)
         {
@@ -159,14 +166,6 @@ public class BattleManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         dialogueText.text = "Your turn";
         state = BattleState.PLAYERTURN;
-    }
-
-
-    string CalculateBonus()
-    {
-        int coin = UnityEngine.Random.Range(enemyStatus.level - 8, enemyStatus.level + 10);
-        StartCoroutine(CoinUpdate(coin, UserInfo.UserID));
-        return "coin: " + coin;
     }
 
     public void OnAttackButton()
@@ -203,6 +202,8 @@ public class BattleManager : MonoBehaviour
             GameObject screen = Instantiate(Loss_Screen, screenPosition);
             screen.transform.SetParent(_canvas.transform);
         }
+        
+        BattleData.ResetData();
     }
 
     IEnumerator CoinUpdate(int coin, string userID)
@@ -228,5 +229,13 @@ public class BattleManager : MonoBehaviour
             }
         }
     }
+    
+    string CalculateBonus()
+    {
+        int coin = UnityEngine.Random.Range(enemyStatus.level - 8, enemyStatus.level + 10);
+        StartCoroutine(CoinUpdate(coin, UserInfo.UserID));
+        return "coin: " + coin;
+    }
+    
 #endregion    
 }
