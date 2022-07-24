@@ -226,7 +226,7 @@ public class Web : MonoBehaviour
         }
     }
  
-    public IEnumerator GetUserInfo(string userID,)//sender is UserID of the person who sends the friend request
+    public IEnumerator GetUserInfo(string userID)//sender is UserID of the person who sends the friend request
     {
         //sign the server needs some time to send a response, thats why we are using a callback
         WWWForm form = new WWWForm();
