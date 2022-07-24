@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 //$result = $conn->query($sql);
   //insert the user and password into the database
   
-  $sql2 = "INSERT INTO useritems (userID, itemID) VALUES ('" . $userID ."' , '" . $itemID ."')";
+  $sql2 = "INSERT INTO usersitems (userID, itemID) VALUES ('" . $userID ."' , '" . $itemID ."')";
   if ($conn->query($sql2) === TRUE) {
     echo "Ressource Gathered! <br>";
   } else {
