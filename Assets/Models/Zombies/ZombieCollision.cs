@@ -6,13 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class ZombieCollision : MonoBehaviour
 {
-    // private void OnTriggerEnter(Collider collision)
-    // {
-    //     Debug.Log("collision");
-    //     if (collision.gameObject.name == "Player")
-    //     {
-    //         SceneManager.LoadScene("BattleLobby");
-    //         Destroy(gameObject);
-    //     }
-    // }
+
+    public int level, damage;
+    private void OnTriggerEnter(Collider collision)
+     {
+         Debug.Log("collision");
+         if (collision.gameObject.name == "Player")
+         {
+            // BattleData.ZombieLevel = level;
+           //  BattleData.ZombieDamage = damage;
+             SceneManager.LoadScene("BattleLobby");
+             Destroy(gameObject);
+         }
+     }
 }

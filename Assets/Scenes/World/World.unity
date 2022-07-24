@@ -38,7 +38,11 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
+<<<<<<< HEAD
   m_IndirectSpecularColor: {r: 0.45111823, g: 0.50091326, b: 0.57400125, a: 1}
+=======
+  m_IndirectSpecularColor: {r: 0.45111728, g: 0.5009119, b: 0.5739999, a: 1}
+>>>>>>> 1c9558c5c71e364944f3238fbfe964511b2943db
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1222,13 +1226,14 @@ GameObject:
   - component: {fileID: 638909387}
   - component: {fileID: 638909386}
   - component: {fileID: 638909385}
+  - component: {fileID: 638909389}
   m_Layer: 5
   m_Name: Menu Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &638909385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1272,7 +1277,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 638909386}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 638909389}
+        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
+        m_MethodName: OnChangeScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &638909386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1328,9 +1345,23 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 78, y: -139}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 400, y: -850}
+  m_SizeDelta: {x: 160, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &638909389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 638909384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ca25839e689a431f8b4d2ebf48e3347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 638909385}
+  sceneName: PlayMenu
 --- !u!1 &644968025
 GameObject:
   m_ObjectHideFlags: 0
@@ -11999,9 +12030,15 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1592881263}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2798.0984, y: -832.82446, z: 1992.3237}
+=======
+  m_GameObject: {fileID: 1798140444}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.12}
+>>>>>>> 1c9558c5c71e364944f3238fbfe964511b2943db
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

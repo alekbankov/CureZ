@@ -71,15 +71,17 @@ public class GetRequests : MonoBehaviour
 
             //set the sell button
 
-           /* RequestGO.transform.Find("accept").GetComponent<Button>().onClick.AddListener(() => {
-                Debug.Log("Button clicked");
-                //string iID = itemId;
-                //string IdInInventory = id;
-                //string userId = UserInfo.UserID;
-                //StartCoroutine(Main.Instance.Web.SellItem( IdInInventory,itemId, userId));
+            RequestGO.transform.Find("accept").GetComponent<Button>().onClick.AddListener(() => {
+                RequestGO.SetActive(false);});
+             //   Debug.Log("Button clicked");
+              /*  string iID = itemId;
+                string IdInInventory = id;
+                string userId = UserInfo.UserID;
+                string buyerId = UserInfo.buyerID;
+                StartCoroutine(Main.Instance.Web.SellItem( IdInInventory,buyerId, itemId, userId));
                 StartCoroutine(Main.Instance.Web.RequestingAnItem(userId, "2", iID));
-                RequestGO.SetActive(true);
-            });*/
+                
+            */
 
             //continue to the next Item
         }

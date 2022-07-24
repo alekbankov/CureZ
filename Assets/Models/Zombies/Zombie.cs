@@ -56,7 +56,6 @@ public class Zombie : MonoBehaviour
         //Make the enemy move
         Vector3 pos = Vector3.MoveTowards(transform.position, player.position, speed * Time.fixedDeltaTime);
         if(distance < 15) {
-            rb.MovePosition(pos);
             bool isMoving;
             isMoving = transform.position != player.position;
             if(distance > 0.1f) {

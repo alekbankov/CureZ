@@ -226,7 +226,7 @@ public class Web : MonoBehaviour
         }
     }
  
-    public IEnumerator GetUserInfo(string userID)//sender is UserID of the person who sends the friend request
+    public IEnumerator GetUserInfo(string userID,)//sender is UserID of the person who sends the friend request
     {
         //sign the server needs some time to send a response, thats why we are using a callback
         WWWForm form = new WWWForm();
@@ -345,6 +345,28 @@ public class Web : MonoBehaviour
             {
                 Debug.Log(request.downloadHandler.text);//or success
                
+            }
+        }
+    }
+    public IEnumerator GetRessources(string userID,string itemID)//sender is UserID of the person who sends the friend request
+    {
+        //sign the server needs some time to send a response, thats why we are using a callback
+        WWWForm form = new WWWForm();
+        form.AddField("userID", userID);
+        form.AddField("itemID", itemID);
+        string uri = "http://localhost/unityserver/GetRessources.php";
+        using (UnityWebRequest request = UnityWebRequest.Post(uri, form))
+        {
+
+            yield return request.SendWebRequest();
+            if (request.isHttpError || request.isNetworkError)
+            {
+                Debug.Log(request.error);//an error message is shown
+            }
+            else
+            {
+                Debug.Log(request.downloadHandler.text);//or success
+                
             }
         }
     }
