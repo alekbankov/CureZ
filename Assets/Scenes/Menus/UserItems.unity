@@ -1123,6 +1123,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemPrefab: {fileID: 5387671657026289827, guid: 3449e7408cbeabc45a6f769d78be516c,
     type: 3}
+  requestPrefab: {fileID: 5387671657026289827, guid: 84528fe0b91cce540af074d94e319dcd,
+    type: 3}
 --- !u!114 &1463681647
 MonoBehaviour:
   m_ObjectHideFlags: 0

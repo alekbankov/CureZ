@@ -9,6 +9,8 @@ public class ItemManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject itemPrefab;
+    [SerializeField]
+    private GameObject requestPrefab;
     //public GameObject item;
     Action<string> _createItemsCallback;
     //public GameObject Item;
@@ -77,9 +79,10 @@ public class ItemManager : MonoBehaviour
                 string userId = UserInfo.UserID;
                 string buyerID = UserInfo.buyerID;
                 
-                StartCoroutine(Main.Instance.Web.RequestingAnItem(userId, "2", iID));
+                StartCoroutine(Main.Instance.Web.RequestingAnItem(userId, buyerID, iID));
                 StartCoroutine(Main.Instance.Web.SellItem( IdInInventory,buyerID, itemId, userId));
 
+               
                 itemGo.SetActive(false);
                   });
 
