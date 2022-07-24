@@ -60,7 +60,8 @@ public class Zombie : MonoBehaviour
             isMoving = transform.position != player.position;
             if(distance > 0.1f) {
                 TargetChar.GetComponent<Animation>().Play(Attack03Anim.name);
-            }else if(distance <= 0.3f)
+                rb.MovePosition(pos);
+            }else 
             {
                 TargetChar.GetComponent<Animation>().Play(Idle.name);
             }

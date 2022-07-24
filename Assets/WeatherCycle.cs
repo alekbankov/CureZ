@@ -81,7 +81,9 @@ public class WeatherCycle : MonoBehaviour
                     break;
                 case Seasons.Summer:
                     currentSeason = Seasons.Summer;
-                    
+                    break;
+                case Seasons.Winter:
+                    currentSeason = Seasons.Winter;
                     break;
             }
         }
@@ -121,8 +123,8 @@ public class WeatherCycle : MonoBehaviour
         if (this.currentSeason == Seasons.Spring)
         {
             ChangeWeather(Weather.Sunny);
-            LerpSunIntensity(this.sunLight, defaultLightIntensity); 
-            LerpLightColor(this.sunLight, defaultLightColor);
+           // LerpSunIntensity(this.sunLight, defaultLightIntensity); 
+           // LerpLightColor(this.sunLight, defaultLightColor);
             
             if (this.seasonTime <= 0f)
             {
@@ -134,8 +136,8 @@ public class WeatherCycle : MonoBehaviour
         if (this.currentSeason == Seasons.Summer)
         {
             ChangeWeather(Weather.HotSun);
-            LerpSunIntensity(this.sunLight, summerLightIntensity); 
-            LerpLightColor(this.sunLight, summerColor);
+          //  LerpSunIntensity(this.sunLight, summerLightIntensity); 
+           // LerpLightColor(this.sunLight, summerColor);
 
             if (this.seasonTime <= 0f)
             {
@@ -147,8 +149,8 @@ public class WeatherCycle : MonoBehaviour
         if (this.currentSeason == Seasons.Autumn)
         {
             ChangeWeather(Weather.Rain);
-            LerpSunIntensity(this.sunLight, autumnLightIntensity); 
-            LerpLightColor(this.sunLight, autumnColor);
+          //  LerpSunIntensity(this.sunLight, autumnLightIntensity); 
+           // LerpLightColor(this.sunLight, autumnColor);
             
             if (this.seasonTime <= 0f)
             {
@@ -160,8 +162,8 @@ public class WeatherCycle : MonoBehaviour
         if (this.currentSeason == Seasons.Winter)
         {
             ChangeWeather(Weather.Snow);
-            LerpSunIntensity(this.sunLight,winterLightIntensity); 
-            LerpLightColor(this.sunLight, winterColor);
+           // LerpSunIntensity(this.sunLight,winterLightIntensity); 
+          //  LerpLightColor(this.sunLight, winterColor);
 
             if (this.seasonTime <= 0f)
             {
