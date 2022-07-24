@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UI;
 using UnityEngine;
 
 public class Zombie : MonoBehaviour
@@ -13,6 +14,7 @@ public class Zombie : MonoBehaviour
     //moving animation configuration
     public GameObject TargetChar;
     public AnimationClip Attack03Anim;
+    public AnimationClip Idle;
 
     [SerializeField] private float spawnRate = 0.5f;
     [SerializeField] private int attack = 0;
@@ -50,15 +52,21 @@ public class Zombie : MonoBehaviour
     void FixedUpdate()
     {
         distance = Vector3.Distance(transform.position, player.position);
+
         //Make the enemy move
         Vector3 pos = Vector3.MoveTowards(transform.position, player.position, speed * Time.fixedDeltaTime);
-        if(distance < 10) {
+        if(distance < 15) {
             rb.MovePosition(pos);
             bool isMoving;
             isMoving = transform.position != player.position;
-            if(isMoving == true) {
+            if(distance > 0.1f) {
                 TargetChar.GetComponent<Animation>().Play(Attack03Anim.name);
+            }else if(distance <= 0.3f)
+            {
+                TargetChar.GetComponent<Animation>().Play(Idle.name);
             }
+            
+            
             transform.LookAt(player);
         }
     }

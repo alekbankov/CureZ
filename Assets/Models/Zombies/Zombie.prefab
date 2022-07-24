@@ -732,7 +732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da54a85290319bf468efb8347fb801b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 308992543801328557, guid: 84d545773fcff4643afbf3c8b811ae5b, type: 3}
+  player: {fileID: 6852550284224322734, guid: bfb4f7fa722821549b02ee22f67e015e, type: 3}
   TargetChar: {fileID: 100036}
   Attack03Anim: {fileID: 7400000, guid: 36f951038cccf164c8901048aeb4fb9e, type: 3}
   spawnRate: 0.5

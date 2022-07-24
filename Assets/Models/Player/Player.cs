@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 {
     
     [SerializeField] private int xp = 0;
+    [SerializeField] private int wood = 0;
     [SerializeField] private int requiredXp = 100;
     [SerializeField] private int levelBase = 100;
     [SerializeField] private int health = 100;
@@ -45,6 +46,10 @@ public class Player : MonoBehaviour
         this.xp += Mathf.Max(0,xp);
     }
 
-
+    public void addWood(int wood)
+    {
+        this.wood += wood;
+        //StartCoroutine(Main.Instance.Web.GetItem(UserInfo.UserID, 6))
+    }
     
 }
