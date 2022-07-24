@@ -4,8 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using SimpleJSON;
 public class Web : MonoBehaviour
 {
+    public GameObject userInfo;
     // Start is called before the first frame update
     void Start()
     {
@@ -81,6 +83,7 @@ public class Web : MonoBehaviour
                 //or success
                 UserInfo.setCredentials(username, password);
                 UserInfo.setID(request.downloadHandler.text);//set the current ID to the user who just logged in's ID
+                //UserInfo.setCoins(request.downloadHandler.text);
                 //this if means we didn't login correctly, we put a small message to try again
                 if ((request.downloadHandler.text.Contains("Wrong Password") ||
                     request.downloadHandler.text.Contains("Username does not exist")))
@@ -198,11 +201,12 @@ public class Web : MonoBehaviour
             }
         }
     }
-    public IEnumerator SellItem(string ID, string itemID, string userID)
+    public IEnumerator SellItem(string ID, string buyerID, string itemID, string userID)
     {
         //sign the server needs some time to send a response, thats why we are using a callback
         WWWForm form = new WWWForm();
         form.AddField("ID", ID);
+        form.AddField("buyerID", buyerID);
         form.AddField("itemID", itemID);
         form.AddField("userID", userID);
         string uri = "http://localhost/unityserver/SellItem.php";
@@ -218,6 +222,129 @@ public class Web : MonoBehaviour
             {
                 Debug.Log(request.downloadHandler.text);//or success
                 
+            }
+        }
+    }
+ 
+    public IEnumerator GetUserInfo(string userID)//sender is UserID of the person who sends the friend request
+    {
+        //sign the server needs some time to send a response, thats why we are using a callback
+        WWWForm form = new WWWForm();
+        form.AddField("userID", userID);
+        string uri = "http://localhost/unityserver/GetUserInfo.php";
+        using (UnityWebRequest request = UnityWebRequest.Post(uri, form))
+        {
+
+            yield return request.SendWebRequest();
+            if (request.isHttpError || request.isNetworkError)
+            {
+                Debug.Log(request.error);//an error message is shown
+            }
+            else
+            {
+                //or success
+
+
+               JSONArray jsonArray =  JSON.Parse(request.downloadHandler.text) as JSONArray;
+                
+                    
+                userInfo.transform.Find("GameName").GetComponent<Text>().text = jsonArray[0].AsObject["username"];
+                userInfo.transform.Find("Level").GetComponent<TMPro.TextMeshProUGUI>().text = jsonArray[0].AsObject["level"];
+                userInfo.transform.Find("Coins").GetComponent<TMPro.TextMeshProUGUI>().text = jsonArray[0].AsObject["coins"];
+
+
+            }
+        }
+    }
+    public IEnumerator RequestingAnItem(string sellerID, string buyerID, string itemID)
+    {
+        //sign the server needs some time to send a response, thats why we are using a callback
+        WWWForm form = new WWWForm();
+        form.AddField("sellerID", sellerID);
+        form.AddField("buyerID", buyerID);
+        form.AddField("itemID", itemID);
+        string uri = "http://localhost/unityserver/CreateRequest.php";
+        using (UnityWebRequest request = UnityWebRequest.Post(uri, form))
+        {
+
+            yield return request.SendWebRequest();
+            if (request.isHttpError || request.isNetworkError)
+            {
+                Debug.Log(request.error);//an error message is shown
+            }
+            else
+            {
+                Debug.Log(request.downloadHandler.text);//or success
+
+            }
+        }
+    }
+    public IEnumerator GetbuyerIDs(string sellerID, System.Action<string> callback)//sender is UserID of the person who sends the friend request
+    {
+        //sign the server needs some time to send a response, thats why we are using a callback
+        WWWForm form = new WWWForm();
+        form.AddField("sellerID", sellerID);
+        string uri = "http://localhost/unityserver/GetRequestID.php";
+        using (UnityWebRequest request = UnityWebRequest.Post(uri, form))
+        {
+
+            yield return request.SendWebRequest();
+            if (request.isHttpError || request.isNetworkError)
+            {
+                Debug.Log(request.error);//an error message is shown
+            }
+            else
+            {
+                Debug.Log(request.downloadHandler.text);//or success
+                string jsonArray = request.downloadHandler.text;
+                //call callback function to pass results
+                callback(jsonArray);
+            }
+        }
+    }
+    public IEnumerator GetrequestList(string buyerID,string itemID ,System.Action<string> callback)//sender is UserID of the person who sends the friend request
+    {
+        //sign the server needs some time to send a response, thats why we are using a callback
+        WWWForm form = new WWWForm();
+        form.AddField("buyerID", buyerID);
+        form.AddField("itemID", itemID);
+        string uri = "http://localhost/unityserver/GetRequests.php";
+        using (UnityWebRequest request = UnityWebRequest.Post(uri, form))
+        {
+
+            yield return request.SendWebRequest();
+            if (request.isHttpError || request.isNetworkError)
+            {
+                Debug.Log(request.error);//an error message is shown
+            }
+            else
+            {
+                Debug.Log(request.downloadHandler.text);//or success
+                string jsonArray = request.downloadHandler.text;
+                //call callback function to pass results
+                callback(jsonArray);
+            }
+        }
+    }
+    public IEnumerator GetCoinsBattle(string userID, string coins)//userID is the person who won the battle
+    {
+        
+        WWWForm form = new WWWForm();
+        form.AddField("userID", userID);
+        form.AddField("coins",coins);
+        string uri = "http://localhost/unityserver/GetCoinsBattle.php";
+        using (UnityWebRequest request = UnityWebRequest.Post(uri, form))
+        {
+
+            yield return request.SendWebRequest();
+            if (request.isHttpError || request.isNetworkError)
+            {
+                Debug.Log(request.error);//an error message is shown
+            }
+            else
+            {
+                Debug.Log(request.downloadHandler.text);//or success
+               
             }
         }
     }
