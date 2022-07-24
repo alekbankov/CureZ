@@ -10,13 +10,22 @@ public class ZombieCollision : MonoBehaviour
     public int level, damage;
     private void OnTriggerEnter(Collider collision)
      {
-         // Debug.Log("collision");
-         // if (collision.gameObject.name == "Player")
-         // {
-         //    // BattleData.ZombieLevel = level;
-         //   //  BattleData.ZombieDamage = damage;
-         //     SceneManager.LoadScene("BattleLobby");
-         //     Destroy(gameObject);
-         // }
+          Debug.Log("collision");
+          if (collision.gameObject.name == "Player")
+          {
+              //sending data to BattleData
+              DateTime now = DateTime.Now;
+              if (now.Hour > 8 || now.Hour < 6)
+              {
+                  BattleData.NightTime = true;
+              }
+              else
+              {
+                  BattleData.NightTime = false;
+              }
+
+              SceneManager.LoadScene("BattleLobby");
+              Destroy(gameObject);
+          }
      }
 }

@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 public enum BattleState { START, PLAYERTURN, ENEMYTURN, WIN, LOST, BONUS }
 public class BattleManager : MonoBehaviour
@@ -20,7 +22,7 @@ public class BattleManager : MonoBehaviour
     private CharacterStatus playerStatus;
     private CharacterStatus enemyStatus;
     private bool revive, damageBonus;
-    private float bonusHeal, nightDamage;
+    private float bonusHeal, nightDamage, season;
     
     
     private GameObject _canvas;
@@ -59,11 +61,39 @@ public class BattleManager : MonoBehaviour
         if (BattleData.NightTime) nightDamage = enemyStatus.damage / 20;
         enemyHUD.SetHUD(enemyStatus);
 
-        dialogueText.text = "Prepare for battle!";
+        string startText = SetSeason();
+        dialogueText.text = startText;
         yield return new WaitForSeconds(1.5f);
 
         dialogueText.text = "Your turn";
         state = BattleState.PLAYERTURN;
+    }
+
+    private string SetSeason()
+    {
+        string startText = "";
+        
+        switch(BattleData.Season)
+        {
+            case Season.RAINY:
+                startText = "Rain pours from the sky";
+                season = -2;
+                break;
+            case Season.SNOWY:
+                startText = "Snow falls steadily";
+                season = -4;
+                break;
+            case Season.SUNNY:
+                startText = "The sun lights the path to victory!";
+                season = 8;
+                break;
+            case Season.NONE:
+                startText = "Prepare for battle";
+                season = 0;
+                break;
+        }
+
+        return startText;
     }
 #endregion
 
@@ -75,7 +105,7 @@ public class BattleManager : MonoBehaviour
         {
             bonus = (int)playerStatus.damage / 10;
         }
-        bool isDead = enemyStatus.TakeDamage(playerStatus.damage + bonus + BattleData.ItemDamage);
+        bool isDead = enemyStatus.TakeDamage(playerStatus.damage + bonus + BattleData.ItemDamage + season);
         
         enemyHUD.SetHP(enemyStatus.currentHealth, enemyStatus.maxHealth);
         if (damageBonus)
@@ -104,7 +134,7 @@ public class BattleManager : MonoBehaviour
 
     IEnumerator PlayerHeal()
     {
-        playerStatus.Heal(10);
+        playerStatus.Heal(15);
         
         playerHUD.SetHP(playerStatus.currentHealth, playerStatus.maxHealth);
         dialogueText.text = "HP healed with bandages!";
@@ -202,7 +232,7 @@ public class BattleManager : MonoBehaviour
             GameObject screen = Instantiate(Loss_Screen, screenPosition);
             screen.transform.SetParent(_canvas.transform);
         }
-        
+        GameManager.Instance.CurrentPlayer.addXp(BattleData.PlayerXP);
         BattleData.ResetData();
     }
 

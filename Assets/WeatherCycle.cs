@@ -96,21 +96,23 @@ public class WeatherCycle : MonoBehaviour
             {
                 case Weather.Snow:
                     currentWeather = Weather.Snow;
-                    //BattleData.Season = Battle.Data.SNOWY
+                    BattleData.Season = Season.SNOWY;
                     this.rain.Stop();
                     this.snow.Play();
                     break;
                 case Weather.Rain:
                     currentWeather = Weather.Rain;
-                    //BattleData.Season = BattleData
+                    BattleData.Season = Season.RAINY;
                     this.rain.Play();
                     break;
                 case Weather.Sunny:
                     currentWeather = Weather.Sunny;
+                    BattleData.Season = Season.SUNNY;
                     this.snow.Stop();
                     break;
                 case Weather.HotSun:
                     currentWeather = Weather.HotSun;
+                    BattleData.Season = Season.SUNNY;
                     break;
             }
     }
