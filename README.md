@@ -81,53 +81,6 @@ Live stat update UI
 
 Everything is built for rapid gameplay iteration.
 
-📂 Project Structure
-CureZ/
-├── Scripts/
-│   ├── Player/
-│   ├── Inventory/
-│   ├── Crafting/
-│   ├── World/
-│   └── UI/
-├── Prefabs/
-├── ScriptableObjects/
-├── Materials/
-└── Scenes/
-
-🛠 Requirements
-Component	Version
-Unity	2021+ (Recommended)
-Pipeline	Built-in
-Input System	Legacy Input (Prototype stage)
-🚀 Getting Started
-
-1. Clone the repo
-
-git clone https://github.com/alekbankov/CureZ
-
-
-2. Open the project in Unity 2021 or newer
-
-3. Load the main scene
-
-4. Hit ▶ Play
-
-📌 Roadmap
-
-✔ Basic survival mechanics
-
-✔ Inventory prototype
-
-✔ Crafting foundations
-
-☐ Equipment system
-
-☐ Enemy AI
-
-☐ Better UI polish
-
-☐ Procedural world improvements
-
 🤝 Contributing
 
 Pull requests, issues, and ideas are welcome!
